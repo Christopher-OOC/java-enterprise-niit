@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome Page</title>
+</head>
+<body>
+    <h1 style="color: blue;">Welcome to Java Enterprise</h1>
+    <h2>Student ID: the id of student is [[${student.id}]]</h2>
+    <h2>Student FullName: [[${student.fullName}]]</h2>
+    <h2>Student Level: [[${student.level}]]</h2>
+
+    <p><a th:href="@{/create}">Create your account here</a></p>
+</body>
+</html>
