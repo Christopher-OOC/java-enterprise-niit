@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class WelcomeController {
+public class StudentController {
 
     @GetMapping(value = "/welcome")
     public String displayWelcomePage(Model model) {
@@ -37,6 +37,13 @@ public class WelcomeController {
         System.out.println(student);
 
         return "redirect:/welcome";
+    }
+
+    @GetMapping(value = "students")
+    public String getAllStudents(Model model) {
+
+
+
     }
 
 
