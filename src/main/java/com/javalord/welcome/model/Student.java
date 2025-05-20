@@ -1,6 +1,12 @@
-package com.javalord.welcome;
+package com.javalord.welcome.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "students")
 public class Student {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String fullName;
     private String level;

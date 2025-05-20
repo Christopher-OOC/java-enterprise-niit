@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <title>Welcome Page</title>
+</head>
+<body>
+    <div>
+        <p>Student List</p>
+        <br />
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Full Name</th>
+                    <th>Level</th>
+                </tr>
+            </thead>
+            <tbody th:each="student : ${students}">
+                <tr>
+                    <td>[[${student.id}]]</td>
+                    <td>[[${student.fullName}]]</td>
+                    <td>[[${student.level}]]</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <p><a th:href="@{/create}">Create your account here</a></p>
+</body>
+</html>
