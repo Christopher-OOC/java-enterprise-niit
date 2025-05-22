@@ -1,5 +1,6 @@
 package com.javalord.welcome.controller;
 
+import com.javalord.welcome.model.Course;
 import com.javalord.welcome.model.Student;
 import com.javalord.welcome.service.StudentService;
 import org.springframework.stereotype.Controller;
@@ -19,15 +20,8 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    @GetMapping(value = "/welcome")
+    @GetMapping(value = "/")
     public String displayWelcomePage(Model model) {
-
-        Student student = new Student();
-        student.setId(1);
-        student.setFullName("John Doe");
-        student.setLevel("LEVEL_1");
-
-        model.addAttribute("student", student);
 
         return "welcome";
     }
@@ -43,6 +37,13 @@ public class StudentController {
 
     @PostMapping(value = "/create")
     public String createStudent(@ModelAttribute("newStudent") Student student) {
+
+        Course course = new Course();
+        course.setName("Database Systems");
+        course.setCode("DBMS");
+
+        student.getCourses().add(course);
+
         studentService.saveStudent(student);
 
         return "redirect:/students";

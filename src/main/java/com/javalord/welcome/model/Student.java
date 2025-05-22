@@ -2,6 +2,9 @@ package com.javalord.welcome.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "students")
 public class Student {
@@ -10,6 +13,8 @@ public class Student {
     private int id;
     private String fullName;
     private String level;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Course> courses = new ArrayList<>();
 
     public int getId() {
         return id;
@@ -33,6 +38,15 @@ public class Student {
 
     public void setLevel(String level) {
         this.level = level;
+    }
+
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
     }
 
     @Override
