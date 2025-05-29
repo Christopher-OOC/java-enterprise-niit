@@ -38,16 +38,16 @@ public class StudentController {
     @PostMapping(value = "/create")
     public String createStudent(@ModelAttribute("newStudent") Student student) {
 
-        Course course = new Course();
-        course.setName("Database Systems");
-        course.setCode("DBMS");
-
-        student.getCourses().add(course);
-
         studentService.saveStudent(student);
 
         return "redirect:/students";
     }
+
+    @GetMapping(value = "/login")
+    public String loginPage() {
+        return "loginPage";
+    }
+
 
     @GetMapping(value = "/students")
     public String getAllStudents(Model model) {
