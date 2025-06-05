@@ -15,6 +15,7 @@ public class Student {
     private String level;
     private String email;
     private String password;
+    private boolean isEnabled = true;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Course> courses = new ArrayList<>();
 
@@ -64,6 +65,14 @@ public class Student {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isEnabled() {
+        return isEnabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        isEnabled = enabled;
     }
 
     @Override

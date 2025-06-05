@@ -9,6 +9,9 @@
 <p>Please fill all this information</p>
 <form method="POST" th:action="@{/login}">
     <div>
+        <h1 th:if="${param.isError}">Invalid username or password!!!</h1>
+    </div>
+    <div>
         <label>Email: </label>
         <input type="text" name="email">
     </div>
