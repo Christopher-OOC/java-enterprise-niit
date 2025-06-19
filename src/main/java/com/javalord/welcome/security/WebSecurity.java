@@ -3,8 +3,10 @@ package com.javalord.welcome.security;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,6 +19,7 @@ import java.util.List;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class WebSecurity {
 
     @Bean
@@ -35,7 +38,7 @@ public class WebSecurity {
                 true,
                 true,
                 true,
-                List.of()
+                List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_MANAGER"))
 
         );
 
@@ -52,7 +55,9 @@ public class WebSecurity {
         return new InMemoryUserDetailsManager(List.of(user1, user2));
     }
 
-     */
+    */
+
+
 
    @Bean
    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

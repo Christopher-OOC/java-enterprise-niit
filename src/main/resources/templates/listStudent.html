@@ -22,7 +22,7 @@
                     <a class="nav-link" th:href="@{/create}">Sign Up</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/students}">Students</a>
+                    <a class="nav-link" th:href="@{/users}">Students</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/admin-courses}">Admin</a>
@@ -42,11 +42,11 @@
                 <th scope="col">Level</th>
             </tr>
             </thead>
-            <tbody th:each="student : ${students}">
+            <tbody th:each="user : ${users}">
                 <tr>
-                    <td>[[${student.id}]]</td>
-                    <td>[[${student.fullName}]]</td>
-                    <td>[[${student.level}]]</td>
+                    <td>[[${user.id}]]</td>
+                    <td>[[${user.fullName}]]</td>
+                    <td>[[${user.level}]]</td>
                 </tr>
             </tbody>
         </table>

@@ -1,13 +1,12 @@
 package com.javalord.welcome.service;
 
 import com.javalord.welcome.model.Course;
-import com.javalord.welcome.model.Student;
+import com.javalord.welcome.model.User;
 import com.javalord.welcome.repository.CourseRepository;
 import com.javalord.welcome.repository.StudentRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CourseService {
@@ -30,10 +29,10 @@ public class CourseService {
     
     public void enrollForACourse(String username, int courseId) {
         Course course = courseRepository.findById(courseId).get();
-        Student student = studentRepository.findByEmail(username);
+        User user = studentRepository.findByEmail(username);
 
-        student.getCourses().add(course);
+        user.getCourses().add(course);
 
-        studentRepository.save(student);
+        studentRepository.save(user);
     }
 }

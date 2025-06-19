@@ -5,9 +5,9 @@
     <title>Create Account Page</title>
 </head>
 <body>
-    <h1>Register as a student</h1>
+    <h1>Register as a user</h1>
     <p>Please fill all this information</p>
-    <form method="POST" th:action="@{/create}" th:object="${newStudent}">
+    <form method="POST" th:action="@{/create}" th:object="${newUser}">
         <div>
             <label>Full Name: </label>
             <input type="text" th:field="*{fullName}">

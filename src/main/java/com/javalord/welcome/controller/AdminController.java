@@ -2,6 +2,9 @@ package com.javalord.welcome.controller;
 
 import com.javalord.welcome.model.Course;
 import com.javalord.welcome.service.CourseService;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +22,11 @@ public class AdminController {
         this.courseService = courseService;
     }
 
+
     @GetMapping(value = "/admin-courses")
+    @Secured("ROLE_ADMIN")
+    @PostAuthorize("hasRole('ADMIN') || hasAuthority('ROLE_ADMIN') ")
+    @PreAuthorize("")
     public String showAndCreateCourses(Model model) {
         List<Course> courses = courseService.getAllCourses();
 

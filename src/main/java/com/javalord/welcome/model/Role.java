@@ -6,15 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="courses")
-public class Course {
+@Table(name = "roles")
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    private String code;
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<User> users = new ArrayList<>();
+    private List<Authority> authorities = new ArrayList<>();
 
     public int getId() {
         return id;
@@ -32,19 +30,11 @@ public class Course {
         this.name = name;
     }
 
-    public String getCode() {
-        return code;
+    public List<Authority> getAuthorities() {
+        return authorities;
     }
 
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public List<User> getStudents() {
-        return users;
-    }
-
-    public void setStudents(List<User> users) {
-        this.users = users;
+    public void setAuthorities(List<Authority> authorities) {
+        this.authorities = authorities;
     }
 }

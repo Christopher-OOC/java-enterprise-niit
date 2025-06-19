@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "students")
-public class Student {
+@Table(name = "users")
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -18,6 +18,7 @@ public class Student {
     private boolean isEnabled = true;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Course> courses = new ArrayList<>();
+    private List<Role> roles = new ArrayList<>();
 
     public int getId() {
         return id;
@@ -77,7 +78,7 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" +
+        return "User{" +
                 "id=" + id +
                 ", fullName='" + fullName + '\'' +
                 ", level='" + level + '\'' +

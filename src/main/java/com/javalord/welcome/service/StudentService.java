@@ -1,8 +1,7 @@
 package com.javalord.welcome.service;
 
-import com.javalord.welcome.model.Student;
+import com.javalord.welcome.model.User;
 import com.javalord.welcome.repository.StudentRepository;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -23,23 +22,25 @@ public class StudentService implements UserDetailsService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public void saveStudent(Student student) {
-        student.setPassword(passwordEncoder.encode(student.getPassword()));
-        studentRepository.save(student);
+    public void saveStudent(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user
+
+        studentRepository.save(user);
     }
 
-    public List<Student> getAllStudents() {
+    public List<User> getAllStudents() {
         return studentRepository.findAll();
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Student student = studentRepository.findByEmail(username);
+        User student = studentRepository.findByEmail(username);
         if (student == null) {
             throw new UsernameNotFoundException("User not found!");
         }
 
-        User user = new User(
+        org.springframework.security.core.userdetails.User user = new org.springframework.security.core.userdetails.User(
                 student.getEmail(),
                 student.getPassword(),
                 student.isEnabled(),

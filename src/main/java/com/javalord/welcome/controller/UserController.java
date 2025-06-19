@@ -1,13 +1,10 @@
 package com.javalord.welcome.controller;
 
 import com.javalord.welcome.model.Course;
-import com.javalord.welcome.model.Student;
+import com.javalord.welcome.model.User;
 import com.javalord.welcome.service.CourseService;
 import com.javalord.welcome.service.StudentService;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,18 +15,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.List;
 
 @Controller
-public class StudentController {
+public class UserController {
 
     private StudentService studentService;
     private CourseService courseService;
 
-    public StudentController(StudentService studentService, CourseService courseService) {
+    public UserController(StudentService studentService, CourseService courseService) {
         this.studentService = studentService;
         this.courseService = courseService;
     }
 
     @GetMapping(value = "/")
-    public String displayWelcomePage(@AuthenticationPrincipal User user,  Model model) {
+    public String displayWelcomePage(@AuthenticationPrincipal org.springframework.security.core.userdetails.User user, Model model) {
 
         model.addAttribute("name", user.getUsername());
 
@@ -38,17 +35,17 @@ public class StudentController {
 
     @GetMapping(value = "/create")
     public String showCreatePage(Model model) {
-        Student newStudent = new Student();
+        User newUser = new User();
 
-        model.addAttribute("newStudent", newStudent);
+        model.addAttribute("newUser", newUser);
 
         return "createAccount";
     }
 
     @PostMapping(value = "/create")
-    public String createStudent(@ModelAttribute("newStudent") Student student) {
+    public String createStudent(@ModelAttribute("newStudent") User user) {
 
-        studentService.saveStudent(student);
+        studentService.saveStudent(user);
 
         return "redirect:/students";
     }
@@ -61,9 +58,9 @@ public class StudentController {
 
     @GetMapping(value = "/students")
     public String getAllStudents(Model model) {
-        List<Student> students = studentService.getAllStudents();
+        List<User> users = studentService.getAllStudents();
 
-        model.addAttribute("students", students);
+        model.addAttribute("users", users);
 
         return "listStudent";
     }
@@ -80,7 +77,7 @@ public class StudentController {
     @GetMapping(value = "/enroll-course/{courseId}")
     public String enrollCourse(
             Model model,
-            @AuthenticationPrincipal User user,
+            @AuthenticationPrincipal org.springframework.security.core.userdetails.User user,
             @PathVariable("courseId") int courseId) {
         courseService.enrollForACourse(user.getUsername(), courseId);
 

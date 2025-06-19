@@ -5,7 +5,7 @@
     <title>Create Account Page</title>
 </head>
 <body>
-<h1>Login as a student</h1>
+<h1>Login as a user</h1>
 <p>Please fill all this information</p>
 <form method="POST" th:action="@{/login}">
     <div>
@@ -23,5 +23,6 @@
 
     <button type="submit">Login</button>
 </form>
+<p>Are you new here? <a th:href="@{/create}">Create an account!</a></p>
 </body>
 </html>
