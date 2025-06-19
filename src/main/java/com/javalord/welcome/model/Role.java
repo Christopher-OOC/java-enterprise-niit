@@ -12,6 +12,7 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
+    @ManyToMany
     private List<Authority> authorities = new ArrayList<>();
 
     public int getId() {

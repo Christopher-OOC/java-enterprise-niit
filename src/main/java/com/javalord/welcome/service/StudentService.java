@@ -16,6 +16,7 @@ public class StudentService implements UserDetailsService {
     private StudentRepository studentRepository;
     private PasswordEncoder passwordEncoder;
 
+
     public StudentService(StudentRepository studentRepository,
                           PasswordEncoder passwordEncoder) {
         this.studentRepository = studentRepository;
@@ -24,7 +25,7 @@ public class StudentService implements UserDetailsService {
 
     public void saveStudent(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user
+
 
         studentRepository.save(user);
     }

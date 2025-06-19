@@ -4,6 +4,7 @@ import com.javalord.welcome.model.Course;
 import com.javalord.welcome.model.User;
 import com.javalord.welcome.service.CourseService;
 import com.javalord.welcome.service.StudentService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
