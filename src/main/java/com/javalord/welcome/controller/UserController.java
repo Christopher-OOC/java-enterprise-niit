@@ -3,8 +3,7 @@ package com.javalord.welcome.controller;
 import com.javalord.welcome.model.Course;
 import com.javalord.welcome.model.User;
 import com.javalord.welcome.service.CourseService;
-import com.javalord.welcome.service.StudentService;
-import org.springframework.security.access.prepost.PreAuthorize;
+import com.javalord.welcome.service.UserService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,11 +17,11 @@ import java.util.List;
 @Controller
 public class UserController {
 
-    private StudentService studentService;
+    private UserService userService;
     private CourseService courseService;
 
-    public UserController(StudentService studentService, CourseService courseService) {
-        this.studentService = studentService;
+    public UserController(UserService userService, CourseService courseService) {
+        this.userService = userService;
         this.courseService = courseService;
     }
 
@@ -34,22 +33,41 @@ public class UserController {
         return "welcome";
     }
 
-    @GetMapping(value = "/create")
+    @GetMapping(value = "/create-student")
     public String showCreatePage(Model model) {
         User newUser = new User();
 
         model.addAttribute("newUser", newUser);
 
-        return "createAccount";
+        return "createStudentAccount";
     }
 
-    @PostMapping(value = "/create")
+    @PostMapping(value = "/create-student")
     public String createStudent(@ModelAttribute("newStudent") User user) {
 
-        studentService.saveStudent(user);
+        userService.saveStudent(user);
 
         return "redirect:/students";
     }
+
+    @GetMapping(value = "/create-admin")
+    public String showCreateAdminPage(Model model) {
+        User newUser = new User();
+
+        model.addAttribute("newUser", newUser);
+
+        return "createAdminAccount";
+    }
+
+    @PostMapping(value = "/create-admin")
+    public String createAdmin(@ModelAttribute("newStudent") User user) {
+
+        userService.saveStudent(user);
+
+        return "redirect:/students";
+    }
+
+
 
     @GetMapping(value = "/login")
     public String loginPage() {
@@ -59,7 +77,7 @@ public class UserController {
 
     @GetMapping(value = "/students")
     public String getAllStudents(Model model) {
-        List<User> users = studentService.getAllStudents();
+        List<User> users = userService.getAllStudents();
 
         model.addAttribute("users", users);
 

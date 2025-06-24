@@ -27,15 +27,16 @@ public class WelcomeApplication {
 			Role role1 = new Role();
 			role1.setName("ROLE_STUDENT");
 
-			String d = "a" + 1;
-
 			Role role2 = new Role();
 			role2.setName("ROLE_TEACHER");
 
 			Role role3 = new Role();
 			role3.setName("ROLE_PRINCIPAL");
 
-			roleRepository.saveAll(List.of(role1, role2, role3));
+			Role role4 = new Role();
+			role3.setName("ROLE_ADMIN");
+
+			roleRepository.saveAll(List.of(role1, role2, role3, role4));
 		};
 	}
 
