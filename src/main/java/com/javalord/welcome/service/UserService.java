@@ -4,12 +4,14 @@ import com.javalord.welcome.model.Role;
 import com.javalord.welcome.model.User;
 import com.javalord.welcome.repository.RoleRepository;
 import com.javalord.welcome.repository.UserRepository;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -59,19 +61,25 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User student = userRepository.findByEmail(username);
-        if (student == null) {
+        User currentUser = userRepository.findByEmail(username);
+        if (currentUser == null) {
             throw new UsernameNotFoundException("User not found!");
         }
 
+        List<Role> roles = currentUser.getRoles();
+        List<SimpleGrantedAuthority> authories = new ArrayList<>();
+        for (Role role : roles) {
+            authories.add(new SimpleGrantedAuthority(role.getName()));
+        }
+
         org.springframework.security.core.userdetails.User user = new org.springframework.security.core.userdetails.User(
-                student.getEmail(),
-                student.getPassword(),
-                student.isEnabled(),
+                currentUser.getEmail(),
+                currentUser.getPassword(),
+                currentUser.isEnabled(),
                 true,
                 true,
                 true,
-                List.of()
+                authories
         );
 
         return user;

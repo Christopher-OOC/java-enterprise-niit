@@ -64,8 +64,13 @@ public class WebSecurity {
 
        return http
                .authorizeHttpRequests(request -> request
-                       .requestMatchers(HttpMethod.POST, "/create").permitAll()
-                       .requestMatchers(HttpMethod.GET, "/create").permitAll()
+                       .requestMatchers(HttpMethod.POST, "/create-student").permitAll()
+                       .requestMatchers(HttpMethod.GET, "/create-student").permitAll()
+                       .requestMatchers(HttpMethod.POST, "/create-admin").hasAnyAuthority("ROLE_ADMIN", "ROLE_PRINCIPAL")
+                       .requestMatchers(HttpMethod.GET, "/create-admin").hasAnyAuthority("ROLE_ADMIN", "ROLE_PRINCIPAL")
+//                       .requestMatchers(HttpMethod.POST, "/create-admin").hasAnyRole("ADMIN", "PRINCIPAL")
+//                       .requestMatchers(HttpMethod.POST, "/create-admin").hasRole("ADMIN")
+//                       .requestMatchers(HttpMethod.POST, "/create-admin").hasAuthority("ROLE_ADMIN")
                        .requestMatchers("/h2-console/**").permitAll()
                        .anyRequest().authenticated()
                )

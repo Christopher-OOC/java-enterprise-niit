@@ -34,7 +34,7 @@ public class WelcomeApplication {
 			role3.setName("ROLE_PRINCIPAL");
 
 			Role role4 = new Role();
-			role3.setName("ROLE_ADMIN");
+			role4.setName("ROLE_ADMIN");
 
 			roleRepository.saveAll(List.of(role1, role2, role3, role4));
 		};
