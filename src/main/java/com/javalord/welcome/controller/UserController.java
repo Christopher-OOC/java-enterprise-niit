@@ -60,9 +60,9 @@ public class UserController {
     }
 
     @PostMapping(value = "/create-admin")
-    public String createAdmin(@ModelAttribute("newStudent") User user) {
+    public String createAdmin(@ModelAttribute("newUser") User user) {
 
-        userService.saveStudent(user);
+        userService.saveAdmin(user);
 
         return "redirect:/students";
     }
@@ -105,6 +105,4 @@ public class UserController {
 
         return "redirect:/enroll-course";
     }
-
-
 }

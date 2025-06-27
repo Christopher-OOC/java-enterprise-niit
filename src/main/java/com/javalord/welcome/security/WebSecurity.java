@@ -57,8 +57,6 @@ public class WebSecurity {
 
     */
 
-
-
    @Bean
    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
@@ -66,6 +64,7 @@ public class WebSecurity {
                .authorizeHttpRequests(request -> request
                        .requestMatchers(HttpMethod.POST, "/create-student").permitAll()
                        .requestMatchers(HttpMethod.GET, "/create-student").permitAll()
+
                        .requestMatchers(HttpMethod.POST, "/create-admin").hasAnyAuthority("ROLE_ADMIN", "ROLE_PRINCIPAL")
                        .requestMatchers(HttpMethod.GET, "/create-admin").hasAnyAuthority("ROLE_ADMIN", "ROLE_PRINCIPAL")
 //                       .requestMatchers(HttpMethod.POST, "/create-admin").hasAnyRole("ADMIN", "PRINCIPAL")
@@ -76,7 +75,7 @@ public class WebSecurity {
                )
                .formLogin( login -> login
                        .loginPage("/login")
-                       .defaultSuccessUrl("/")
+                       .defaultSuccessUrl("/", true)
                        .failureUrl("/login?isError")
                        .usernameParameter("email")
                        .passwordParameter("password")

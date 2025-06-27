@@ -18,7 +18,7 @@ public class User {
     private boolean isEnabled = true;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Course> courses = new ArrayList<>();
-    @OneToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> roles = new ArrayList<>();
 
     public int getId() {
